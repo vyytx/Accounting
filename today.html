@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>index</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
+    <script type="text/javascript" src="js/fdb.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script src="cordova.js"></script>
+    <script type="text/javascript" src="js/sweetalert.js"></script>
+    <script type="text/javascript" src="js/promise.js"></script>
+</head>
+<body>
+    <h1>今天的帳</h1><br />
+    <br />
+    <br />
+    <table>
+        <tr>
+            <th>名稱</th>
+            <th>金額</th>
+            <th>日期</th>
+            <th>類別</th>
+            <th>動作</th>
+        </tr>
+    </table>
+    <script>
+        var fdb = new ForerunnerDB();
+        var db = fdb.db("DB");
+        var expensesCollection = db.collection("expenses");
+        var id = "";
+        expensesCollection.load(function(){
+            $("table").hide();
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1;
+            var yyyy = today.getFullYear();
+            if(dd<10) {
+                dd='0'+dd
+            }
+            if(mm<10) {
+                mm='0'+mm
+            }
+            today = yyyy + '-' + mm + '-' + dd;
+
+            var searchToday = expensesCollection.find(
+                {date: today},
+                {
+                    $orderBy:{date:-1}
+                }
+            );
+
+            if(searchToday.length === 0){
+                $("table").html("<h1>查無資料</h1>");
+            }else{
+                searchToday.forEach((ele) => {                    
+                    $("table").append(`<tr><td>${ele.name}</td><td>${ele.amount}</td><td>${ele.date}</td><td>${ele.cate}</td><td><button class='prime edit' data-id='${ele._id}'>編輯</button></td></tr>`);
+                });
+                $("body").on("click" , ".edit" , function(){
+                    id = $(this).data('id');
+                    var edit = $(this);
+                    var that = expensesCollection.findById(id);
+                    swal({
+                        title: '編輯',
+                        type: 'info',
+                        showCancelButton: true,
+                        showCloseButton: true,
+                        confirmButtonColor: '#3377bb',
+                        cancelButtonColor: '#dd3333',
+                        confirmButtonText: '確定',
+                        cancelButtonText: '刪除',
+                        confirmButtonClass: "cf",
+                        cancelButtonClass: "cc",
+                        background: "#f1f1f1",
+                        html: `
+                        <div class="input"><label>名稱: </label><input id="name" type="text" /></div><br />
+                        <div class="input"><label>日期: </label><input id="date" type="date" /></div><br />
+                        <div class="input"><label>金額: </label><input id="amount" type="number" /></div><br />
+                        <div class="input"><label>類別: </label>
+                            <select id="cate" style="left: -4px;position: relative;">
+                                <option value="o選">請選擇</option>
+                                <option value="o食">食</option>
+                                <option value="o衣">衣</option>
+                                <option value="o住">住</option>
+                                <option value="o行">行</option>
+                                <option value="o育">育</option>
+                                <option value="o樂">樂</option>
+                            </select>
+                        </div>`
+                    });
+                    setTimeout(() => {
+                        $("#name").val(that.name);
+                        $("#date").val(that.date);
+                        $("#amount").val(that.amount);
+                        $("#cate").val("o"+that.cate);
+                        $(".cf").click(function(){
+                            if($("#name").val() == ""){
+                                swal("更改失敗", "沒有填入名稱", "error");
+                                return;
+                            }
+                            if($("#amount").val() <= 0){
+                                swal("更改失敗", "金額不在0~N之間或沒有填入", "error");
+                                return;
+                            }
+                            if($("#cate").val() == "o選"){
+                                swal("更改失敗", "沒有選擇類別", "error");
+                                return;
+                            }
+                            expensesCollection.updateById(
+                            id,{
+                                name: $("#name").val(),
+                                date: $("#date").val(),
+                                amount: $("#amount").val()/1,
+                                cate: $("#cate").val().split("o")[1]
+                            });
+                            expensesCollection.save();
+                            edit.closest("tr").html(`<td>${$("#name").val()}</td><td>${$("#amount").val()}</td><td>${$("#date").val()/1}</td><td>${$("#cate").val().split("o")[1]}</td><td><button class='prime edit' data-id='${id}'>編輯</button></td>`);
+                            swal("更改成功", "", "success");
+                        });
+                        $(".cc").click(function(){
+                            expensesCollection.removeById(id);
+                            expensesCollection.save();
+                            edit.closest("tr").remove();
+                            swal("刪除成功", "", "success");
+                        });
+                    }, 10);
+                });
+            }
+            $("table").show();
+        });
+    </script>
+</body>
+<style>
+    h1 {
+        text-align: center;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    th, td > button {
+        width: 48px;
+        height: 36px;
+    }
+
+    tr:nth-child(even) {background-color: #ffffff;}
+</style>
+</html>

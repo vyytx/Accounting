@@ -6,8 +6,14 @@
     <title>index</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/sweetalert.css">
+    <script src="phonegap.js"></script>
+    <script src="cordova.js"></script>
+    <script type="text/javascript" src="js/fdb.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/sweetalert.js"></script>
+    <script type="text/javascript" src="js/promise.js"></script>
 </head>
-<body>
+<body onload="init()">
     <h1>記帳</h1><br />
     <br />
     <br />
@@ -29,58 +35,55 @@
     
     <div><button class="prime" id="submit">確認</button></div>
     
-    <script type="text/javascript" src="js/fdb.js"></script>
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/sweetalert.js"></script>
-    <script type="text/javascript" src="js/promise.js"></script>
-    
     <script>
-        var fdb = new ForerunnerDB();
-        var db = fdb.db("DB");
-        var expensesCollection = db.collection("expenses");
-        expensesCollection.load();
-      	
-      	var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth()+1;
-        var yyyy = today.getFullYear();
-        if(dd<10) {
-            dd='0'+dd
-        }
-        if(mm<10) {
-            mm='0'+mm
-        }
-        today = yyyy + '-' + mm + '-' + dd;
-      	
-        $("#date").val(today);
-        $("#cate").val("o選");
-      
-        $("#submit").click(function(){
-            if($("#name").val() == ""){
-                swal("儲存失敗", "沒有填入名稱", "error");
-                return;
+        function init(){
+            var fdb = new ForerunnerDB();
+            var db = fdb.db("DB");
+            var expensesCollection = db.collection("expenses");
+            expensesCollection.load();
+            
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1;
+            var yyyy = today.getFullYear();
+            if(dd<10) {
+                dd='0'+dd
             }
-            if($("#amount").val() <= 0){
-                swal("儲存失敗", "金額不在0~N之間或沒有填入", "error");
-                return;
+            if(mm<10) {
+                mm='0'+mm
             }
-            if($("#cate").val() == "o選"){
-                swal("儲存失敗", "沒有選擇類別", "error");
-                return;
-            }
-            expensesCollection.insert({
-                name: $("#name").val(),
-                date: $("#date").val(),
-                amount: $("#amount").val()/1,
-                cate: $("#cate").val().split("o")[1]
-            });
-            expensesCollection.save();
-            $("#name").val("");
-            $("#date").val("");
-            $("#amount").val("");
+            today = yyyy + '-' + mm + '-' + dd;
+            
+            $("#date").val(today);
             $("#cate").val("o選");
-            swal("儲存成功", "", "success").then(()=>{location.reload()});
-        });
+        
+            $("#submit").om("click touchend", function(){
+                if($("#name").val() == ""){
+                    swal("儲存失敗", "沒有填入名稱", "error");
+                    return;
+                }
+                if($("#amount").val() <= 0){
+                    swal("儲存失敗", "金額不在0~N之間或沒有填入", "error");
+                    return;
+                }
+                if($("#cate").val() == "o選"){
+                    swal("儲存失敗", "沒有選擇類別", "error");
+                    return;
+                }
+                expensesCollection.insert({
+                    name: $("#name").val(),
+                    date: $("#date").val(),
+                    amount: $("#amount").val()/1,
+                    cate: $("#cate").val().split("o")[1]
+                });
+                expensesCollection.save();
+                $("#name").val("");
+                $("#date").val("");
+                $("#amount").val("");
+                $("#cate").val("o選");
+                swal("儲存成功", "", "success").then(()=>{location.reload()});
+            });
+        }
     </script>
 </body>
 <style>

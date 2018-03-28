@@ -57,32 +57,32 @@
                 $("#date").val(today);
                 $("#cate").val("o選");
             
-            //     $("#submit").on("click touchend", function(){
-            //         if($("#name").val() == ""){
-            //             swal("儲存失敗", "沒有填入名稱", "error");
-            //             return;
-            //         }
-            //         if($("#amount").val() <= 0){
-            //             swal("儲存失敗", "金額不在0~N之間或沒有填入", "error");
-            //             return;
-            //         }
-            //         if($("#cate").val() == "o選"){
-            //             swal("儲存失敗", "沒有選擇類別", "error");
-            //             return;
-            //         }
-            //         expensesCollection.insert({
-            //             name: $("#name").val(),
-            //             date: $("#date").val(),
-            //             amount: $("#amount").val()/1,
-            //             cate: $("#cate").val().split("o")[1]
-            //         });
-            //         expensesCollection.save();
-            //         $("#name").val("");
-            //         $("#date").val("");
-            //         $("#amount").val("");
-            //         $("#cate").val("o選");
-            //         swal("儲存成功", "", "success").then(()=>{location.reload()});
-            //     });
+                $("#submit").on("click touchend", function(){
+                    if($("#name").val() == ""){
+                        swal("儲存失敗", "沒有填入名稱", "error");
+                        return;
+                    }
+                    if($("#amount").val() <= 0){
+                        swal("儲存失敗", "金額不在0~N之間或沒有填入", "error");
+                        return;
+                    }
+                    if($("#cate").val() == "o選"){
+                        swal("儲存失敗", "沒有選擇類別", "error");
+                        return;
+                    }
+                    expensesCollection.insert({
+                        name: $("#name").val(),
+                        date: $("#date").val(),
+                        amount: $("#amount").val()/1,
+                        cate: $("#cate").val().split("o")[1]
+                    });
+                    expensesCollection.save();
+                    $("#name").val("");
+                    $("#date").val("");
+                    $("#amount").val("");
+                    $("#cate").val("o選");
+                    swal("儲存成功", "", "success").then(()=>{location.reload()});
+                });
             });
         }
     </script>

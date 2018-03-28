@@ -41,21 +41,21 @@
             var db = fdb.db("DB");
             var expensesCollection = db.collection("expenses");
             alert("test");
-            // expensesCollection.load(function(){
-            //     var today = new Date();
-            //     var dd = today.getDate();
-            //     var mm = today.getMonth()+1;
-            //     var yyyy = today.getFullYear();
-            //     if(dd<10) {
-            //         dd='0'+dd
-            //     }
-            //     if(mm<10) {
-            //         mm='0'+mm
-            //     }
-            //     today = yyyy + '-' + mm + '-' + dd;
+            expensesCollection.load(function(){
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth()+1;
+                var yyyy = today.getFullYear();
+                if(dd<10) {
+                    dd='0'+dd
+                }
+                if(mm<10) {
+                    mm='0'+mm
+                }
+                today = yyyy + '-' + mm + '-' + dd;
                 
-            //     $("#date").val(today);
-            //     $("#cate").val("o選");
+                $("#date").val(today);
+                $("#cate").val("o選");
             
             //     $("#submit").on("click touchend", function(){
             //         if($("#name").val() == ""){
@@ -83,7 +83,7 @@
             //         $("#cate").val("o選");
             //         swal("儲存成功", "", "success").then(()=>{location.reload()});
             //     });
-            // });
+            });
         }
     </script>
 </body>

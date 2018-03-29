@@ -57,7 +57,7 @@
                 $("#date").val(today);
                 $("#cate").val("o選");
             
-                $("#submit").on("tap", function(){
+                $("#submit").on("touchend", function(){
                     if($("#name").val() == ""){
                         setTimeout(function(){
                             swal("儲存失敗", "沒有填入名稱", "error");

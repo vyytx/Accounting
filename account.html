@@ -60,8 +60,10 @@
             
                 $("#submit").on("tap", function(){
                     if($("#name").val() == ""){
-                        swal("儲存失敗", "沒有填入名稱", "error");
-                        return;
+                        setTimeout(function(){
+                            swal("儲存失敗", "沒有填入名稱", "error");
+                            return;
+                        }, 300);
                     }
                     // if($("#amount").val() <= 0){
                     //     swal("儲存失敗", "金額不在0~N之間或沒有填入", "error");

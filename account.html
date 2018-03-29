@@ -57,12 +57,12 @@
                 $("#date").val(today);
                 $("#cate").val("o選");
             
-                $("#submit").on("touchend", function(){
+                $("#submit").on("click touchend", function(){
                     if($("#name").val() == ""){
                         setTimeout(function(){
                             swal("儲存失敗", "沒有填入名稱", "error");
                             return;
-                        }, 300);
+                        }, 100);
                     }
                     // if($("#amount").val() <= 0){
                     //     swal("儲存失敗", "金額不在0~N之間或沒有填入", "error");

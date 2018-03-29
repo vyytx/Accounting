@@ -10,6 +10,7 @@
     <script src="cordova.js"></script>
     <script type="text/javascript" src="js/fdb.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquerym.js"></script>
     <script type="text/javascript" src="js/sweetalert.js"></script>
     <script type="text/javascript" src="js/promise.js"></script>
 </head>
@@ -57,7 +58,7 @@
                 $("#date").val(today);
                 $("#cate").val("o選");
             
-                $("#submit").on("touchend", function(){
+                $("#submit").on("tap", function(){
                     if($("#name").val() == ""){
                         swal("儲存失敗", "沒有填入名稱", "error");
                         return;

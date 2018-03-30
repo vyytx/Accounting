@@ -111,7 +111,7 @@
                     $("table").html("<h1>查無資料</h1>");
                 }else{
                     $("table").html("<tr><th>名稱</th><th>金額</th><th>日期</th><th>類別</th><th>動作</th></tr>");
-                    search.forEach((ele) => {                    
+                    search.forEach(function(ele){                    
                         $("table").append(`<tr><td>${ele.name}</td><td>${ele.amount}</td><td>${ele.date}</td><td>${ele.cate}</td><td><button class='prime edit' data-id='${ele._id}'>編輯</button></td></tr>`);
                     });
                     $("body").on("click touchend", ".edit", function(){

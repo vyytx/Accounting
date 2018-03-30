@@ -29,30 +29,30 @@
     <script>
         function init(){
                 alert("loaded");
-//             var fdb = new ForerunnerDB();
-//             var db = fdb.db("DB");
-//             var expensesCollection = db.collection("expenses");
-//             var id = "";
-//             expensesCollection.load(function(){
-//                 $("table").hide();
-//                 var today = new Date();
-//                 var dd = today.getDate();
-//                 var mm = today.getMonth()+1;
-//                 var yyyy = today.getFullYear();
-//                 if(dd<10) {
-//                     dd='0'+dd
-//                 }
-//                 if(mm<10) {
-//                     mm='0'+mm
-//                 }
-//                 today = yyyy + '-' + mm + '-' + dd;
+            var fdb = new ForerunnerDB();
+            var db = fdb.db("DB");
+            var expensesCollection = db.collection("expenses");
+            var id = "";
+            expensesCollection.load(function(){
+                $("table").hide();
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth()+1;
+                var yyyy = today.getFullYear();
+                if(dd<10) {
+                    dd='0'+dd
+                }
+                if(mm<10) {
+                    mm='0'+mm
+                }
+                today = yyyy + '-' + mm + '-' + dd;
 
-//                 var searchToday = expensesCollection.find(
-//                     {date: today},
-//                     {
-//                         $orderBy:{date:-1}
-//                     }
-//                 );
+                var searchToday = expensesCollection.find(
+                    {date: today},
+                    {
+                        $orderBy:{date:-1}
+                    }
+                );
 
 //                 if(searchToday.length === 0){
 //                     $("table").html("<h1>查無資料</h1>");
@@ -132,7 +132,7 @@
 //                     });
 //                 }
 //                 $("table").show();
-//             });
+            });
         }
     </script>
 </body>

@@ -40,7 +40,6 @@
             var fdb = new ForerunnerDB();
             var db = fdb.db("DB");
             var expensesCollection = db.collection("expenses");
-            alert("test");
             expensesCollection.load(function(){
                 var today = new Date();
                 var dd = today.getDate();
@@ -78,11 +77,6 @@
                             cate: $("#cate").val().split("o")[1]
                         });
                         expensesCollection.save();
-                        $("#name").val("");
-                        $("#date").val("");
-                        $("#amount").val("");
-                        $("#cate").val("o選");
-                        alert(expensesCollection.find()[0]);
                         swal("儲存成功", "", "success").then(function(){location.reload()});
                     }, 100);
                 });

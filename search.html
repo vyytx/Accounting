@@ -113,77 +113,69 @@
                     }else{
                         $("table").html("<tr><th>名稱</th><th>金額</th><th>日期</th><th>類別</th><th>動作</th></tr>");
                         for(var i = 0; i < search.length; i++){
-                        var ele = search[i];
-                        $("table").append(`<tr><td>${ele.name}</td><td>${ele.amount}</td><td>${ele.date}</td><td>${ele.cate}</td><td><button class='prime edit' data-id='${ele._id}'>編輯</button></td></tr>`);
-                    };
+                            var ele = search[i];
+                            $("table").append("<tr><td>"+ele.name+"</td><td>"+ele.amount+"</td><td>"+ele.date+"</td><td>"+ele.cate+"</td><td><button class='prime edit' data-id='"+ele._id+"'>編輯</button></td></tr>");
+                        };
                         $("body").on("click touchend", ".edit", function(){
-                            id = $(this).data('id');
-                            var edit = $(this);
-                            var that = expensesCollection.findById(id);
-                            swal({
-                                title: '編輯',
-                                type: 'info',
-                                showCancelButton: true,
-                                showCloseButton: true,
-                                confirmButtonColor: '#3377bb',
-                                cancelButtonColor: '#dd3333',
-                                confirmButtonText: '確定',
-                                cancelButtonText: '刪除',
-                                confirmButtonClass: "cf",
-                                cancelButtonClass: "cc",
-                                background: "#f1f1f1",
-                                html: `
-                                <div class="input"><label>名稱: </label><input id="name" type="text" /></div><br />
-                                <div class="input"><label>日期: </label><input id="date" type="date" /></div><br />
-                                <div class="input"><label>金額: </label><input id="amount" type="number" /></div><br />
-                                <div class="input"><label>類別: </label>
-                                    <select id="cate" style="left: -4px;position: relative;">
-                                        <option value="o選">請選擇</option>
-                                        <option value="o食">食</option>
-                                        <option value="o衣">衣</option>
-                                        <option value="o住">住</option>
-                                        <option value="o行">行</option>
-                                        <option value="o育">育</option>
-                                        <option value="o樂">樂</option>
-                                    </select>
-                                </div>`
-                            });
                             setTimeout(function(){
-                                $("#name").val(that.name);
-                                $("#date").val(that.date);
-                                $("#amount").val(that.amount);
-                                $("#cate").val("o"+that.cate);
-                                $(".cf").on("click touchend", function(){
-                                    if($("#name").val() == ""){
-                                        swal("更改失敗", "沒有填入名稱", "error");
-                                        return;
-                                    }
-                                    if($("#amount").val() <= 0){
-                                        swal("更改失敗", "金額不在0~N之間或沒有填入", "error");
-                                        return;
-                                    }
-                                    if($("#cate").val() == "o選"){
-                                        swal("更改失敗", "沒有選擇類別", "error");
-                                        return;
-                                    }
-                                    expensesCollection.updateById(
-                                    id,{
-                                        name: $("#name").val(),
-                                        date: $("#date").val(),
-                                        amount: $("#amount").val()/1,
-                                        cate: $("#cate").val().split("o")[1]
+                                id = $(this).data('id');
+                                var edit = $(this);
+                                var that = expensesCollection.findById(id);
+                                swal({
+                                    title: '編輯',
+                                    type: 'info',
+                                    showCancelButton: true,
+                                    showCloseButton: true,
+                                    confirmButtonColor: '#3377bb',
+                                    cancelButtonColor: '#dd3333',
+                                    confirmButtonText: '確定',
+                                    cancelButtonText: '刪除',
+                                    confirmButtonClass: "cf",
+                                    cancelButtonClass: "cc",
+                                    background: "#f1f1f1",
+                                    html: '<div class="input"><label>名稱: </label><input id="name" type="text" /></div><br /><div class="input"><label>日期: </label><input id="date" type="date" /></div><br /><div class="input"><label>金額: </label><input id="amount" type="number" /></div><br /><div class="input"><label>類別: </label><select id="cate" style="left: -4px;position: relative;"><option value="o選">請選擇</option><option value="o食">食</option><option value="o衣">衣</option><option value="o住">住</option><option value="o行">行</option><option value="o育">育</option><option value="o樂">樂</option></select></div>'
+                                });
+                                setTimeout(function(){
+                                    $("#name").val(that.name);
+                                    $("#date").val(that.date);
+                                    $("#amount").val(that.amount);
+                                    $("#cate").val("o"+that.cate);
+                                    $(".cf").on("click touchend", function(){
+                                        setTimeout(function(){
+                                            if($("#name").val() == ""){
+                                                swal("更改失敗", "沒有填入名稱", "error");
+                                                return;
+                                            }
+                                            if($("#amount").val() <= 0){
+                                                swal("更改失敗", "金額不在0~N之間或沒有填入", "error");
+                                                return;
+                                            }
+                                            if($("#cate").val() == "o選"){
+                                                swal("更改失敗", "沒有選擇類別", "error");
+                                                return;
+                                            }
+                                            expensesCollection.updateById(
+                                            id,{
+                                                name: $("#name").val(),
+                                                date: $("#date").val(),
+                                                amount: $("#amount").val()/1,
+                                                cate: $("#cate").val().split("o")[1]
+                                            });
+                                            expensesCollection.save();
+                                            edit.closest("tr").html("<td>"+$("#name").val()+"</td><td>"+$("#amount").val()+"</td><td>"+$("#date").val()+"</td><td>"+$("#cate").val().split("o")[1]+"</td><td><button class='prime edit' data-id='"+ele._id+"'>編輯</button></td>");
+                                            swal("更改成功", "", "success");
+                                        }, 100);
                                     });
-                                    expensesCollection.save();
-                                    edit.closest("tr").html(`<td>${$("#name").val()}</td><td>${$("#amount").val()}</td><td>${$("#date").val()/1}</td><td>${$("#cate").val().split("o")[1]}</td><td><button class='prime edit' data-id='${id}'>編輯</button></td>`);
-                                    swal("更改成功", "", "success");
-                                });
-                                $(".cc").on("click touchend", function(){
-                                    expensesCollection.removeById(id);
-                                    expensesCollection.save();
-                                    edit.closest("tr").remove();
-                                    swal("刪除成功", "", "success");
-                                });
-                            }, 10);
+                                    $(".cc").on("click touchend", function(){
+                                        setTimeout(function(){
+                                            expensesCollection.removeById(id);
+                                            expensesCollection.save();
+                                            edit.closest("tr").remove();
+                                            swal("刪除成功", "", "success");
+                                        }, 100);
+                                    });
+                                }, 100);
+                            },100);
                         });
                     }
                     $("table").show();

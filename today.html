@@ -33,7 +33,7 @@
         var expensesCollection = db.collection("expenses");
         var id = "";
         expensesCollection.load(function(){
-            $("table").hide();
+//             $("table").hide();
             var today = new Date();
             var dd = today.getDate();
             var mm = today.getMonth()+1;
@@ -130,7 +130,7 @@
                 //     }, 100);
                 // });
             }
-            $("table").show();
+//             $("table").show();
         });
     </script>
 </body>

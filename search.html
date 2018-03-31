@@ -117,10 +117,10 @@
                             $("table").append("<tr><td>"+ele.name+"</td><td>"+ele.amount+"</td><td>"+ele.date+"</td><td>"+ele.cate+"</td><td><button class='prime edit' data-id='"+ele._id+"'>編輯</button></td></tr>");
                         };
                         $("body").on("click touchend", ".edit", function(){
+                            id = $(this).data('id');
+                            var edit = $(this);
+                            var that = expensesCollection.findById(id);
                             setTimeout(function(){
-                                id = $(this).data('id');
-                                var edit = $(this);
-                                var that = expensesCollection.findById(id);
                                 swal({
                                     title: '編輯',
                                     type: 'info',
@@ -136,10 +136,10 @@
                                     html: '<div class="input"><label>名稱: </label><input id="name" type="text" /></div><br /><div class="input"><label>日期: </label><input id="date" type="date" /></div><br /><div class="input"><label>金額: </label><input id="amount" type="number" /></div><br /><div class="input"><label>類別: </label><select id="cate" style="left: -4px;position: relative;"><option value="o選">請選擇</option><option value="o食">食</option><option value="o衣">衣</option><option value="o住">住</option><option value="o行">行</option><option value="o育">育</option><option value="o樂">樂</option></select></div>'
                                 });
                                 setTimeout(function(){
-                                    $("#name").val(that.name);
-                                    $("#date").val(that.date);
-                                    $("#amount").val(that.amount);
-                                    $("#cate").val("o"+that.cate);
+                                    $("#name").val(that["name"]);
+                                    $("#date").val(that["date"]);
+                                    $("#amount").val(that["amount"]);
+                                    $("#cate").val("o"+that["cate"]);
                                     $(".cf").on("click touchend", function(){
                                         setTimeout(function(){
                                             if($("#name").val() == ""){

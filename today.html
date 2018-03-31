@@ -80,8 +80,6 @@
                                 html: '<div class="input"><label>名稱: </label><input id="name" type="text" /></div><br /><div class="input"><label>日期: </label><input id="date" type="date" /></div><br /><div class="input"><label>金額: </label><input id="amount" type="number" /></div><br /><div class="input"><label>類別: </label><select id="cate" style="left: -4px;position: relative;"><option value="o選">請選擇</option><option value="o食">食</option><option value="o衣">衣</option><option value="o住">住</option><option value="o行">行</option><option value="o育">育</option><option value="o樂">樂</option></select></div>'
                             });
                             setTimeout(function(){
-                                console.log(expensesCollection.find(), id);
-                                console.log(that);
                                 $("#name").val(that["name"]);
                                 $("#date").val(that["date"]);
                                 $("#amount").val(that["amount"]);

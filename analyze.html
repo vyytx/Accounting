@@ -68,7 +68,7 @@
                         $orderBy:{date:-1}
                     });
                     var total1 = 0;
-                    for (const i in search1) {
+                    for(var i = 0; i < search1.length; i++){
                         if (search1.hasOwnProperty(i) && i != "__fdbOp" && i != "$cursor") {
                             const ele = search1[i].amount;
                             total1+=ele;
@@ -81,7 +81,7 @@
                         $orderBy:{date:-1}
                     });
                     var total2 = 0;
-                    for (const i in search2) {
+                    for(var i = 0; i < search2.length; i++){
                         if (search2.hasOwnProperty(i) && i != "__fdbOp" && i != "$cursor") {
                             const ele = search2[i].amount;
                             total2+=ele;
@@ -94,7 +94,7 @@
                         $orderBy:{date:-1}
                     });
                     var total3 = 0;
-                    for (const i in search3) {
+                    for(var i = 0; i < search3.length; i++){
                         if (search3.hasOwnProperty(i) && i != "__fdbOp" && i != "$cursor") {
                             const ele = search3[i].amount;
                             total3+=ele;
@@ -107,7 +107,7 @@
                         $orderBy:{date:-1}
                     });
                     var total4 = 0;
-                    for (const i in search4) {
+                    for(var i = 0; i < search4.length; i++){
                         if (search4.hasOwnProperty(i) && i != "__fdbOp" && i != "$cursor") {
                             const ele = search4[i].amount;
                             total4+=ele;
@@ -120,7 +120,7 @@
                         $orderBy:{date:-1}
                     });
                     var total5 = 0;
-                    for (const i in search5) {
+                    for(var i = 0; i < search5.length; i++){
                         if (search5.hasOwnProperty(i) && i != "__fdbOp" && i != "$cursor") {
                             const ele = search5[i].amount;
                             total5+=ele;
@@ -133,7 +133,7 @@
                         $orderBy:{date:-1}
                     });
                     var total6 = 0;
-                    for (const i in search6) {
+                    for(var i = 0; i < search6.length; i++){
                         if (search6.hasOwnProperty(i) && i != "__fdbOp" && i != "$cursor") {
                             const ele = search6[i].amount;
                             total6+=ele;

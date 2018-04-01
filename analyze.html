@@ -70,7 +70,7 @@
                         });
                         var total1 = 0;
                         for(var i = 0; i < search1.length; i++){
-                            const ele = search1[i].amount;
+                            const ele = search1[i].amount/1;
                             total1+=ele;
                         }
                         data.push(total1);
@@ -148,7 +148,7 @@
                         //         labels: ['食','衣','住','行','育','樂']
                         //     }
                         // });
-                    });
+                    }, 100);
                 });
             });
         }

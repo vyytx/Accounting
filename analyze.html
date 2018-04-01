@@ -12,12 +12,158 @@
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/sweetalert.js"></script>
     <script type="text/javascript" src="js/promise.js"></script>
+    <script type="text/javascript" src="js/chart.js"></script>
 </head>
-<body>
-    <h1>分析(功能未啟用)</h1><br />
+<body onload="init()">
+    <h1>分析</h1><br />
     <br />
     <br />
+    <div class="input2"><label>日期: </label><input id="date1" type="date" /><sep>~</sep><input id="date2" type="date" /></div><br />
+    <div><button class="prime" id="submit">確認</button></div>
     <br />
+    <br />
+    <div style="width:400px;height:400px;position:relative;left:50%;transform:translateX(-50%)"><canvas id="cate" width="400" height="400"></canvas></div>
+    </div>
+    <script>
+        function init(){
+            var fdb = new ForerunnerDB();
+            var db = fdb.db("DB");
+            var expensesCollection = db.collection("expenses");
+            expensesCollection.load(function(){
+                var id = "";
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth()+1;
+                var yyyy = today.getFullYear();
+                if(dd<10) {
+                    dd='0'+dd
+                }
+                if(mm<10) {
+                    mm='0'+mm
+                }
+                today = yyyy + '-' + mm + '-' + dd;
+
+                $("#submit").on("click touchend", function(){
+                    var searchObj = {};
+                    if($("#date1").val() !== "" && $("#date2").val() !== ""){
+                        searchObj.date = {
+                            $gte: $("#date1").val(),
+                            $lte: $("#date2").val()
+                        }
+                    }else if($("#date1").val() !== ""){
+                        searchObj.date = {
+                            $gte: $("#date1").val(),
+                            $lte: today
+                        }
+                    }else if($("#date2").val() !== ""){
+                        searchObj.date = {
+                            $gte: "2000-01-01",
+                            $lte: $("#date2").val()
+                        }
+                    }
+                    var data = [];
+
+                    searchObj.cate="食"
+                    var search1 = expensesCollection.find(searchObj,{
+                        $orderBy:{date:-1}
+                    });
+                    var total1 = 0;
+                    for (const i in search1) {
+                        if (search1.hasOwnProperty(i) && i != "__fdbOp" && i != "$cursor") {
+                            const ele = search1[i].amount;
+                            total1+=ele;
+                        }
+                    }
+                    data.push(total1);
+
+                    searchObj.cate="衣"
+                    var search2 = expensesCollection.find(searchObj,{
+                        $orderBy:{date:-1}
+                    });
+                    var total2 = 0;
+                    for (const i in search2) {
+                        if (search2.hasOwnProperty(i) && i != "__fdbOp" && i != "$cursor") {
+                            const ele = search2[i].amount;
+                            total2+=ele;
+                        }
+                    }
+                    data.push(total2);
+
+                    searchObj.cate="住"
+                    var search3 = expensesCollection.find(searchObj,{
+                        $orderBy:{date:-1}
+                    });
+                    var total3 = 0;
+                    for (const i in search3) {
+                        if (search3.hasOwnProperty(i) && i != "__fdbOp" && i != "$cursor") {
+                            const ele = search3[i].amount;
+                            total3+=ele;
+                        }
+                    }
+                    data.push(total3);
+
+                    searchObj.cate="行"
+                    var search4 = expensesCollection.find(searchObj,{
+                        $orderBy:{date:-1}
+                    });
+                    var total4 = 0;
+                    for (const i in search4) {
+                        if (search4.hasOwnProperty(i) && i != "__fdbOp" && i != "$cursor") {
+                            const ele = search4[i].amount;
+                            total4+=ele;
+                        }
+                    }
+                    data.push(total4);
+                    
+                    searchObj.cate="育"
+                    var search5 = expensesCollection.find(searchObj,{
+                        $orderBy:{date:-1}
+                    });
+                    var total5 = 0;
+                    for (const i in search5) {
+                        if (search5.hasOwnProperty(i) && i != "__fdbOp" && i != "$cursor") {
+                            const ele = search5[i].amount;
+                            total5+=ele;
+                        }
+                    }
+                    data.push(total5);
+
+                    searchObj.cate="樂"
+                    var search6 = expensesCollection.find(searchObj,{
+                        $orderBy:{date:-1}
+                    });
+                    var total6 = 0;
+                    for (const i in search6) {
+                        if (search6.hasOwnProperty(i) && i != "__fdbOp" && i != "$cursor") {
+                            const ele = search6[i].amount;
+                            total6+=ele;
+                        }
+                    }
+                    data.push(total6);
+
+                    var ctx = document.getElementById("cate").getContext('2d');
+                    var catePieChart = new Chart(ctx,{
+                        type: 'pie',
+                        data: {
+                            datasets: [{
+                                data: data,
+                                backgroundColor: [
+                                    'rgb(255, 99, 132)',
+                                    'rgb(54, 162, 235)',
+                                    'rgb(255, 206, 86)',
+                                    'rgb(75, 192, 192)',
+                                    'rgb(153, 102, 255)',
+                                    'rgb(255, 159, 64)'
+                                ]
+                            }],
+                            labels: ['食','衣','住','行','育','樂']
+                        }
+                    });
+
+                });
+            });
+        }
+    </script>
 </body>
 <style>
     h1 {

@@ -17,7 +17,7 @@
     <h1>今天的帳</h1><br />
     <br />
     <br />
-    <table>
+    <table style="display:none;">
         <tr>
             <th>名稱</th>
             <th>金額</th>
@@ -33,7 +33,6 @@
             var expensesCollection = db.collection("expenses");
             var id = "";
             expensesCollection.load(function(){
-                $("table").hide();
                 var today = new Date();
                 var dd = today.getDate();
                 var mm = today.getMonth()+1;
@@ -116,6 +115,9 @@
                                         expensesCollection.save();
                                         edit.closest("tr").remove();
                                         swal("刪除成功", "", "success");
+                                        if($("tr").length == 1){
+                                            $("table").html("<h1>查無資料</h1>");
+                                        }
                                     }, 100);
                                 });
                             }, 100);

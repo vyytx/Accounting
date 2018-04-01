@@ -17,7 +17,6 @@
     <h1>查詢</h1><br />
     <br />
     <br />
-    <br />
     <div class="input"><label>名稱: </label><input id="name1" type="text" /></div><br />
     <div class="input2"><label>日期: </label><input id="date1" type="date" /><sep>~</sep><input id="date2" type="date" /></div><br />
     <div class="input2"><label>金額: </label><input id="amount1" type="number" /><sep>~</sep><input id="amount2" type="number" /></div><br />
@@ -36,7 +35,7 @@
     <div><button class="prime" id="submit">確認</button></div>
     <br />
     <br />
-    <table>
+    <table style="display:none;">
         <tr>
             <th>名稱</th>
             <th>金額</th>
@@ -52,7 +51,6 @@
             var expensesCollection = db.collection("expenses");
             expensesCollection.load(function(){
                 var id = "";
-                $("table").hide();
                 var today = new Date();
                 var dd = today.getDate();
                 var mm = today.getMonth()+1;
@@ -172,6 +170,9 @@
                                             expensesCollection.save();
                                             edit.closest("tr").remove();
                                             swal("刪除成功", "", "success");
+                                            if($("tr").length == 1){
+                                                $("table").html("<h1>查無資料</h1>");
+                                            }
                                         }, 100);
                                     });
                                 }, 100);

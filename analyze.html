@@ -22,7 +22,9 @@
     <div><button class="prime" id="submit">確認</button></div>
     <br />
     <br />
-    <div style="width:400px;height:400px;position:relative;left:50%;transform:translateX(-50%)"><canvas id="cate" width="400" height="400"></canvas></div>
+    <div style="width:100%;height:400px;text-align:center">
+        <canvas id="cate" width="400" height="400"></canvas>
+    </div>
     </div>
     <script>
         function init(){
@@ -130,7 +132,7 @@
                         }
                         data.push(total6/1);
 
-                        alert("" + total1 + ", " + total2 + ", " + total3 + ", " + total4 + ", " + total5 + ", " + total6);
+                        //alert("" + total1 + ", " + total2 + ", " + total3 + ", " + total4 + ", " + total5 + ", " + total6);
                         var ctx = document.getElementById("cate").getContext('2d');
                         var catePieChart = new Chart(ctx,{
                             type: 'pie',

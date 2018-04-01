@@ -73,63 +73,63 @@
                             const ele = search1[i].amount/1;
                             total1+=ele;
                         }
-                        data.push(total1);
-                        alert(data[0]);
-                        // searchObj.cate="衣";
-                        // var search2 = expensesCollection.find(searchObj,{
-                        //     $orderBy:{date:-1}
-                        // });
-                        // var total2 = 0;
-                        // for(var i = 0; i < search2.length; i++){
-                        //     const ele = search2[i].amount;
-                        //     total2+=ele;
-                        // }
-                        // data.push(total2);
+                        data.push(total1/1);
 
-                        // searchObj.cate="住";
-                        // var search3 = expensesCollection.find(searchObj,{
-                        //     $orderBy:{date:-1}
-                        // });
-                        // var total3 = 0;
-                        // for(var i = 0; i < search3.length; i++){
-                        //     const ele = search3[i].amount;
-                        //     total3+=ele;
-                        // }
-                        // data.push(total3);
+                        searchObj.cate="衣";
+                        var search2 = expensesCollection.find(searchObj,{
+                            $orderBy:{date:-1}
+                        });
+                        var total2 = 0;
+                        for(var i = 0; i < search2.length; i++){
+                            const ele = search2[i].amount/1;
+                            total2+=ele;
+                        }
+                        data.push(total2/1);
 
-                        // searchObj.cate="行";
-                        // var search4 = expensesCollection.find(searchObj,{
-                        //     $orderBy:{date:-1}
-                        // });
-                        // var total4 = 0;
-                        // for(var i = 0; i < search4.length; i++){
-                        //     const ele = search4[i].amount;
-                        //     total4+=ele;
-                        // }
-                        // data.push(total4);
+                        searchObj.cate="住";
+                        var search3 = expensesCollection.find(searchObj,{
+                            $orderBy:{date:-1}
+                        });
+                        var total3 = 0;
+                        for(var i = 0; i < search3.length; i++){
+                            const ele = search3[i].amount/1;
+                            total3+=ele;
+                        }
+                        data.push(total3/1);
+
+                        searchObj.cate="行";
+                        var search4 = expensesCollection.find(searchObj,{
+                            $orderBy:{date:-1}
+                        });
+                        var total4 = 0;
+                        for(var i = 0; i < search4.length; i++){
+                            const ele = search4[i].amount/1;
+                            total4+=ele;
+                        }
+                        data.push(total4/1);
                         
-                        // searchObj.cate="育";
-                        // var search5 = expensesCollection.find(searchObj,{
-                        //     $orderBy:{date:-1}
-                        // });
-                        // var total5 = 0;
-                        // for(var i = 0; i < search5.length; i++){
-                        //     const ele = search5[i].amount;
-                        //     total5+=ele;
-                        // }
-                        // data.push(total5);
+                        searchObj.cate="育";
+                        var search5 = expensesCollection.find(searchObj,{
+                            $orderBy:{date:-1}
+                        });
+                        var total5 = 0;
+                        for(var i = 0; i < search5.length; i++){
+                            const ele = search5[i].amount/1;
+                            total5+=ele;
+                        }
+                        data.push(total5/1);
 
-                        // searchObj.cate="樂";
-                        // var search6 = expensesCollection.find(searchObj,{
-                        //     $orderBy:{date:-1}
-                        // });
-                        // var total6 = 0;
-                        // for(var i = 0; i < search6.length; i++){
-                        //     const ele = search6[i].amount;
-                        //     total6+=ele;
-                        // }
-                        // data.push(total6);
-                        alert("" /*+ total1 + total2 + total3 + total4 + total5 + total6*/);
+                        searchObj.cate="樂";
+                        var search6 = expensesCollection.find(searchObj,{
+                            $orderBy:{date:-1}
+                        });
+                        var total6 = 0;
+                        for(var i = 0; i < search6.length; i++){
+                            const ele = search6[i].amount/1;
+                            total6+=ele;
+                        }
+                        data.push(total6/1);
+                        alert("" + total1 + ", " + total2 + ", " + total3 + ", " + total4 + ", " + total5 + ", " + total6);
                         // var ctx = document.getElementById("cate").getContext('2d');
                         // var catePieChart = new Chart(ctx,{
                         //     type: 'pie',

@@ -69,10 +69,8 @@
                     });
                     var total1 = 0;
                     for(var i = 0; i < search1.length; i++){
-                        if (search1.hasOwnProperty(i) && i != "__fdbOp" && i != "$cursor") {
-                            const ele = search1[i].amount;
-                            total1+=ele;
-                        }
+                        const ele = search1[i].amount;
+                        total1+=ele;
                     }
                     data.push(total1);
 
@@ -82,10 +80,8 @@
                     });
                     var total2 = 0;
                     for(var i = 0; i < search2.length; i++){
-                        if (search2.hasOwnProperty(i) && i != "__fdbOp" && i != "$cursor") {
-                            const ele = search2[i].amount;
-                            total2+=ele;
-                        }
+                        const ele = search2[i].amount;
+                        total2+=ele;
                     }
                     data.push(total2);
 
@@ -95,10 +91,8 @@
                     });
                     var total3 = 0;
                     for(var i = 0; i < search3.length; i++){
-                        if (search3.hasOwnProperty(i) && i != "__fdbOp" && i != "$cursor") {
-                            const ele = search3[i].amount;
-                            total3+=ele;
-                        }
+                        const ele = search3[i].amount;
+                        total3+=ele;
                     }
                     data.push(total3);
 
@@ -108,10 +102,8 @@
                     });
                     var total4 = 0;
                     for(var i = 0; i < search4.length; i++){
-                        if (search4.hasOwnProperty(i) && i != "__fdbOp" && i != "$cursor") {
-                            const ele = search4[i].amount;
-                            total4+=ele;
-                        }
+                        const ele = search4[i].amount;
+                        total4+=ele;
                     }
                     data.push(total4);
                     
@@ -121,10 +113,8 @@
                     });
                     var total5 = 0;
                     for(var i = 0; i < search5.length; i++){
-                        if (search5.hasOwnProperty(i) && i != "__fdbOp" && i != "$cursor") {
-                            const ele = search5[i].amount;
-                            total5+=ele;
-                        }
+                        const ele = search5[i].amount;
+                        total5+=ele;
                     }
                     data.push(total5);
 
@@ -134,31 +124,29 @@
                     });
                     var total6 = 0;
                     for(var i = 0; i < search6.length; i++){
-                        if (search6.hasOwnProperty(i) && i != "__fdbOp" && i != "$cursor") {
-                            const ele = search6[i].amount;
-                            total6+=ele;
-                        }
+                        const ele = search6[i].amount;
+                        total6+=ele;
                     }
                     data.push(total6);
-
-                    var ctx = document.getElementById("cate").getContext('2d');
-                    var catePieChart = new Chart(ctx,{
-                        type: 'pie',
-                        data: {
-                            datasets: [{
-                                data: data,
-                                backgroundColor: [
-                                    'rgb(255, 99, 132)',
-                                    'rgb(54, 162, 235)',
-                                    'rgb(255, 206, 86)',
-                                    'rgb(75, 192, 192)',
-                                    'rgb(153, 102, 255)',
-                                    'rgb(255, 159, 64)'
-                                ]
-                            }],
-                            labels: ['食','衣','住','行','育','樂']
-                        }
-                    });
+                    alert("" + total1 + total2 + total3 + total4 + total5 + total6);
+                    // var ctx = document.getElementById("cate").getContext('2d');
+                    // var catePieChart = new Chart(ctx,{
+                    //     type: 'pie',
+                    //     data: {
+                    //         datasets: [{
+                    //             data: data,
+                    //             backgroundColor: [
+                    //                 'rgb(255, 99, 132)',
+                    //                 'rgb(54, 162, 235)',
+                    //                 'rgb(255, 206, 86)',
+                    //                 'rgb(75, 192, 192)',
+                    //                 'rgb(153, 102, 255)',
+                    //                 'rgb(255, 159, 64)'
+                    //             ]
+                    //         }],
+                    //         labels: ['食','衣','住','行','育','樂']
+                    //     }
+                    // });
 
                 });
             });

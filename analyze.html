@@ -47,7 +47,7 @@
                 }
                 today = yyyy + '-' + mm + '-' + dd;
 
-                $("#submit").on("click touchend", function(){
+                $("#submit").on("click", function(){
                     setTimeout(function(){
                         var searchObj = {};
                         if($("#date1").val() !== "" && $("#date2").val() !== ""){

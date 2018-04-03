@@ -59,7 +59,7 @@
                         var ele = searchToday[i];
                         $("table").append("<tr><td>"+ele.name+"</td><td>"+ele.amount+"</td><td>"+ele.date+"</td><td>"+ele.cate+"</td><td><button class='prime edit' data-id='"+ele._id+"'>編輯</button></td></tr>");
                     };
-                    $("body").on("click touchend" , ".edit" , function(){
+                    $("body").on("click" , ".edit" , function(){
                         id = $(this).data('id');
                         var edit = $(this);
                         var that = expensesCollection.findById(id);
@@ -83,7 +83,7 @@
                                 $("#date").val(that["date"]);
                                 $("#amount").val(that["amount"]);
                                 $("#cate").val("o"+that["cate"]);
-                                $(".cf").on("click touchend", function(){
+                                $(".cf").on("click", function(){
                                     setTimeout(function(){
                                         if($("#name").val() == ""){
                                             swal("更改失敗", "沒有填入名稱", "error");
@@ -109,7 +109,7 @@
                                         swal("更改成功", "", "success");
                                     }, 100);
                                 });
-                                $(".cc").on("click touchend", function(){
+                                $(".cc").on("click", function(){
                                     setTimeout(function(){
                                         expensesCollection.removeById(id);
                                         expensesCollection.save();

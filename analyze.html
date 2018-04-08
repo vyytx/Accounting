@@ -22,14 +22,16 @@
     <div><button class="prime" id="submit">確認</button></div>
     <br />
     <br />
-    <canvas id="cate"></canvas>
+    <div class=".canvas">
+        <canvas class=".canvas" id="cate"></canvas>
+    </div>
     </div>
     </div>
     <script>
         function init(){
-            $("canvas").attr({"width": innerWidth+"px", "height": innerWidth+"px"});
+            $(".canvas").attr({"width": innerWidth+"px", "height": innerWidth+"px"});
             if(innerWidth > 600){
-                $("canvas").attr({"width": "600px", "height": "600px"});
+                $(".canvas").attr({"width": "600px", "height": "600px"});
             }
             var fdb = new ForerunnerDB();
             var db = fdb.db("DB");

@@ -28,6 +28,9 @@
     <script>
         function init(){
             $("canvas").attr({"width": innerWidth+"px", "height": innerWidth+"px"});
+            if(innerWidth > 600){
+                $("canvas").attr({"width": "600px", "height": "600px"});
+            }
             var fdb = new ForerunnerDB();
             var db = fdb.db("DB");
             var expensesCollection = db.collection("expenses");
